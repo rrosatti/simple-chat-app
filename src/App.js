@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Messages from './Components/Messages';
+import SendMessageForm from './Components/SendMessageForm'
 import './App.css';
 
 const instanceLocator = "v1:us1:4cf18d0e-6b04-40d6-bf4a-a957da25f04c"
@@ -58,6 +59,9 @@ class App extends Component {
     return (
       <div className="App">
         <Messages messages={this.state.messages}/>
+        <br/>
+        <br/>
+        <SendMessageForm />
       </div>
     );
   }
