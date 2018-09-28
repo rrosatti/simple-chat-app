@@ -8,7 +8,7 @@ class Messages extends Component {
       messages = this.props.messages.map(message => {
         console.log(message);
         return (
-            <MessageItem key={message.senderId} message={message} />
+            <MessageItem key={message.id} message={message} />
         )
       });
     }
