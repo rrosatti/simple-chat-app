@@ -6,7 +6,7 @@ class Messages extends Component {
     let messages;
     if (this.props.messages) {
       messages = this.props.messages.map(message => {
-        console.log(message);
+        //console.log(message);
         return (
             <MessageItem key={message.id} message={message} />
         )

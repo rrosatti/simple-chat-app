@@ -7,6 +7,7 @@ class SendMessageForm extends Component {
       message: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -15,9 +16,20 @@ class SendMessageForm extends Component {
     })
   }
 
+  handleSubmit(e) {
+    console.log(this.state.message);
+    this.props.sendMessage(this.state.message);
+    this.setState({
+      message: ''
+    });
+    e.preventDefault();
+  }
+
   render() {
     return (
-      <form className="SendMessageForm">
+      <form
+        onSubmit={this.handleSubmit}
+        className="SendMessageForm" >
         <input
           onChange={this.handleChange}
           value={this.state.message}

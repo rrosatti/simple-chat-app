@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Messages from './Components/Messages';
 import SendMessageForm from './Components/SendMessageForm'
+import Title from './Components/Title'
 import './App.css';
 
 const instanceLocator = "v1:us1:4cf18d0e-6b04-40d6-bf4a-a957da25f04c"
@@ -14,7 +15,8 @@ class App extends Component {
     super();
     this.state = {
       messages: []
-    }
+    };
+    this.handleSendMessage = this.handleSendMessage.bind(this);
   }
 
   componentDidMount() {
@@ -25,9 +27,10 @@ class App extends Component {
         url: testToken
       })
     });
-    console.log(chatManager);
+
     chatManager.connect().then(currentUser => {
-      currentUser.subscribeToRoom({
+      this.currentUser = currentUser;
+      this.currentUser.subscribeToRoom({
         roomId: roomId,
         hooks: {
           onNewMessage: message => {
@@ -40,8 +43,8 @@ class App extends Component {
     });
   }
 
-  componentWillMount() {
-    /**this.setState({
+  /**componentWillMount() {
+    this.setState({
       messages: [
         {
           senderId: "john",
@@ -52,16 +55,25 @@ class App extends Component {
           text: "fine!"
         }
       ]
-    })*/
+    })
+  }*/
+
+  handleSendMessage(message) {
+    console.log(message);
+    this.currentUser.sendMessage({
+      message,
+      roomId: roomId
+    });
   }
 
   render() {
     return (
       <div className="App">
+        <Title />
         <Messages messages={this.state.messages}/>
         <br/>
         <br/>
-        <SendMessageForm />
+        <SendMessageForm sendMessage={this.handleSendMessage}/>
       </div>
     );
   }
